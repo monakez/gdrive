@@ -7,7 +7,7 @@ COPY . .
 #  && godep restore
 #RUN go mod init
 #RUN go build  -ldflags '-w -s'
-RUN go get -v -u github.com/monakez/gdrive
+RUN go install  github.com/monakez/gdrive@latest
 
 FROM alpine:latest AS bin
 COPY --from=build /go/bin/gdrive /
