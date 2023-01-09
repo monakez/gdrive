@@ -1,3 +1,21 @@
+# BUILD
+
+```bash
+docker build --no-cache --target bin --tag gdrive:1.0.3 .
+```
+
+##Usage
+
+```bash
+docker run --rm -it -v $(pwd)/xxxx@gmail.com:/config gdrive:1.0.3 list
+```
+
+open oauth2 page and get redirected to
+http://localhost:1/?state=state&code=_CODE_TO_COPY_PASTE_&scope=https://www.googleapis.com/auth/drive
+at final page
+then copy code and paste into
+
+
 ## News
 #### 01.01.2023
 Work has started on [Gdrive 3.0](https://github.com/glotlabs/gdrive) which will replace this project.

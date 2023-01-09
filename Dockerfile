@@ -5,10 +5,22 @@ COPY . .
 #ENV GO111MODULE=off
 #RUN go get github.com/tools/godep \
 #  && godep restore
-#RUN go mod init
-#RUN go build  -ldflags '-w -s'
-RUN go install  github.com/monakez/gdrive@latest
+RUN go mod init \
+  && go get -u \
+  && go mod tidy
+RUN go build  -ldflags '-w -s'
+#RUN go install  github.com/monakez/gdrive@latest
 
 FROM alpine:latest AS bin
-COPY --from=build /go/bin/gdrive /
+ARG UID=1000
+ARG GID=1000
+
+RUN addgroup -g $GID gdrive && \
+    adduser --shell /sbin/nologin --disabled-password \
+    --no-create-home --uid $UID --ingroup gdrive gdrive
+
+USER gdrive
+ENV GDRIVE_CONFIG_DIR=/config
+
+COPY --from=build /go/src/gdrive/gdrive /
 ENTRYPOINT ["/gdrive"]

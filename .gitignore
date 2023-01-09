@@ -1,3 +1,4 @@
+vendor
 # Ignore bin folder and drive binary
 _release/bin
 
