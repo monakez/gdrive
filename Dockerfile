@@ -25,4 +25,4 @@ VOLUME /config
 ENV GDRIVE_CONFIG_DIR=/config
 
 COPY --from=build /go/src/gdrive/gdrive /
-#ENTRYPOINT ["/gdrive"]
+ENTRYPOINT ["/gdrive"]
